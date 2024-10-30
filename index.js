@@ -3,6 +3,12 @@ const { Band } = require('./models/Band')
 const { Musician } = require('./models/Musician')
 const { Song } = require("./models/Song")
 // Define associations here
+
+// A musician can only belong to one band
+// but a band can have many musicians.
+Musician.belongsTo(Band);
+Band.hasMany(Musician);
+
 const bandSeed = [
     {
         name: 'Coldplay',
@@ -38,10 +44,7 @@ const initialize = async ()=>{
     let allBands = Band.bulkCreate(bandSeed);
     let allMusicians = Musician.bulkCreate(musicianSeed);
 }
-// A musician can only belong to one band
-// but a band can have many musicians.
-Musician.belongsTo(Band);
-Band.hasMany(Musician);
+
 
 initialize();
 

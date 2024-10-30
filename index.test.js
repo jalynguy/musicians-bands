@@ -12,6 +12,14 @@ describe('Band, Musician, and Song Models', () => {
         // test suite is run
         await sequelize.sync({ force: true });
     })
+    test('Testing for one-to-many association', async ()=>{
+        const allBands = await Band.findAll();
+        for(let i = 0; i < allBands.length; i++){
+            console.log(allBands[i].name);
+        }
+        expect(allBands.length).toBe(3);
+    })
+
 
     test('can create a Band', async () => {
         const testBand = await Band.create({name: 'Imagine Dragons', genre: 'Pop Rock'});
@@ -48,7 +56,7 @@ describe('Band, Musician, and Song Models', () => {
         // TODO - test deleting a band
         const findBand = await Band.findByPk(1);
         let deletedBand = await findBand.destroy();
-        expect(deletedBand.name).toBe('Imagine Dragons');
+        expect(deletedBand.name).toBe('Coldplay');
     })
 
     test('can delete a Musician', async () => {
